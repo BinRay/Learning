@@ -61,7 +61,7 @@ int main(int argc, char* argv[]){
 	//netstat 此时该套接字状态LISTEN
 
 	//5. 收发数据
-	write(clnt_sock, message.c_str(), sizeof(message.c_str()));
+	write(clnt_sock, message.c_str(), message.size());
 
 	//6. 关闭套接字（文件描述符）
 	close(clnt_sock);
