@@ -15,6 +15,7 @@
 #include "util.h"
 
 #define BUF_SIZE 1024
+#define DATA_LEN_INDICATION 4
 
 using namespace std;
 
@@ -22,8 +23,6 @@ int main(int argc, char* argv[]){
     int sock;
     struct sockaddr_in serv_addr;
     char send_message[BUF_SIZE];
-    char recv_message[BUF_SIZE];
-    int str_len;
 
     if(argc != 3){
         printf("Usage: %s <IP> <PORT>\n", argv[0]);
@@ -59,12 +58,21 @@ int main(int argc, char* argv[]){
         }
 
         write(sock, send_message, BUF_SIZE);
+        // 应用层协议，前4个字节表示数据长度（包括这4个）
+
+
         // tcp无边界
-        str_len = read(sock, recv_message, BUF_SIZE);
-        cout << "server return:" << recv_message << endl;
+        char recv_message[BUF_SIZE];
+        int data_len;
+        read(sock, &data_len, DATA_LEN_INDICATION);
+        cout << data_len << endl;
+        int recv_len = 0;
+        while(recv_len + DATA_LEN_INDICATION < data_len){
+            recv_len += read(sock, &recv_message[recv_len], BUF_SIZE);
+        }
+        cout << "server return:" << endl << recv_message << endl;
 
     }
-
     close(sock);
 }
 

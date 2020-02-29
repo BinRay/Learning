@@ -9,7 +9,11 @@
 #include <string>
 
 #define BUF_SIZE 1024
+#define DATA_LEN_INDICATION 4
+
 using namespace std;
+
+static int clnt_id = 0;
 
 void error_handling(string message);
 
@@ -21,9 +25,7 @@ int main(int argc, char* argv[]){
 	struct sockaddr_in serv_addr;	//服务器地址信息，ipv4地址族结构体
 	struct sockaddr_in clnt_addr;	//客户端地址信息
 	socklen_t clnt_addr_size;	//客户端地址长度
-	
-	string message = "hello, socket";
-	
+
 	if (argc != 2){
 		printf("Usage: %s <port>\n", argv[0]);
 		exit(1);
@@ -55,6 +57,7 @@ int main(int argc, char* argv[]){
 	//4. 在监听套接字上接受请求
 
 	clnt_sock = accept(serv_sock, (struct sockaddr*)&clnt_addr, &clnt_addr_size);
+	clnt_id ++;
 	if(clnt_sock == -1){
 		error_handling("accept() error");
 	}
@@ -65,13 +68,15 @@ int main(int argc, char* argv[]){
 	char clnt_message[BUF_SIZE];
 	int clnt_message_size;
 	while ((clnt_message_size =read(clnt_sock, clnt_message, BUF_SIZE) != -1)){
-	    cout << clnt_message << endl;
-	    memset(clnt_message, 0, sizeof(clnt_message));
+        string message = "hello, ";
+        message = message + to_string(clnt_id) + "," + clnt_message;
+        cout << message << endl;
+        int data_len = DATA_LEN_INDICATION + message.size();
+        write(clnt_sock, (char*)&data_len, DATA_LEN_INDICATION);
         write(clnt_sock, message.c_str(), message.size());
-        write(clnt_sock, "\n", 1);
-        write(clnt_sock, clnt_message, sizeof(clnt_message));
+        memset(clnt_message, 0, sizeof(clnt_message));
     }
-	
+
 	//6. 关闭套接字（文件描述符）
 	close(clnt_sock);
 	close(serv_sock);	
