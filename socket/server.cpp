@@ -71,7 +71,7 @@ int main(int argc, char* argv[]){
         write(clnt_sock, "\n", 1);
         write(clnt_sock, clnt_message, sizeof(clnt_message));
     }
-
+	
 	//6. 关闭套接字（文件描述符）
 	close(clnt_sock);
 	close(serv_sock);	
