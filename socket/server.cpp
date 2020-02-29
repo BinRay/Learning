@@ -8,6 +8,7 @@
 #include <iostream>
 #include <string>
 
+#define BUF_SIZE 1024
 using namespace std;
 
 void error_handling(string message);
@@ -61,7 +62,15 @@ int main(int argc, char* argv[]){
 	//netstat 此时该套接字状态LISTEN
 
 	//5. 收发数据
-	write(clnt_sock, message.c_str(), sizeof(message.c_str()));
+	char clnt_message[BUF_SIZE];
+	int clnt_message_size;
+	while ((clnt_message_size =read(clnt_sock, clnt_message, BUF_SIZE) != -1)){
+	    cout << clnt_message << endl;
+	    memset(clnt_message, 0, sizeof(clnt_message));
+        write(clnt_sock, message.c_str(), message.size());
+        write(clnt_sock, "\n", 1);
+        write(clnt_sock, clnt_message, sizeof(clnt_message));
+    }
 
 	//6. 关闭套接字（文件描述符）
 	close(clnt_sock);

@@ -13,12 +13,16 @@
 #include <string>
 
 #include "util.h"
+
+#define BUF_SIZE 1024
+
 using namespace std;
 
 int main(int argc, char* argv[]){
     int sock;
     struct sockaddr_in serv_addr;
-    char message[30];
+    char send_message[BUF_SIZE];
+    char recv_message[BUF_SIZE];
     int str_len;
 
     if(argc != 3){
@@ -42,14 +46,24 @@ int main(int argc, char* argv[]){
     if(connect(sock, (struct sockaddr*)(&serv_addr), sizeof(serv_addr)) == -1){
         error_handling("connect() error");
     }
+    cout << "connected..." << endl;
 
     // 3. 收发数据
-    str_len = read(sock, message, sizeof(message)-1);
-    if(str_len == -1){
-        error_handling("read() error!");
-    }
+    while(1){
+        fputs("Input message(Q to quit):", stdout);
+        fgets(send_message, BUF_SIZE, stdin);
 
-    cout << "server return:" << message << endl;
+        // 退出客户端，相等为0而不是1
+        if(!strcmp(send_message, "q\n") || !strcmp(send_message, "Q\n")){
+            break;
+        }
+
+        write(sock, send_message, BUF_SIZE);
+        // tcp无边界
+        str_len = read(sock, recv_message, BUF_SIZE);
+        cout << "server return:" << recv_message << endl;
+
+    }
 
     close(sock);
 }
