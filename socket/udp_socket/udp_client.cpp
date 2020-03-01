@@ -13,6 +13,8 @@
 
 #define BUF_SIZE 30
 
+using namespace std;
+
 void error_handling(char* message);
 
 int main(int argc, char* argv[]){
@@ -49,6 +51,7 @@ int main(int argc, char* argv[]){
         adr_sz = sizeof(from_adr);
         str_len = recvfrom(sock, message, BUF_SIZE, 0, (struct sockaddr*)&from_adr, &adr_sz);
         message[str_len] = 0;
+        cout << message << endl;
     }
     close(sock);
     return 0;

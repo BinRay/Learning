@@ -43,12 +43,13 @@ int main(int argc, char* argv[]){
         error_handling("bind() error");
     }
 
+    cout << "try to receiver data" << endl;
     while(1){
         clnt_adr_sz = sizeof(clnt_adr);
-        cout << "try to receiver data" << endl;
         str_len = recvfrom(serv_sock, message, BUF_SIZE, 0, (struct sockaddr*)&clnt_adr, &clnt_adr_sz);
         cout << "server recv:" << message << endl;
         sendto(serv_sock, message, BUF_SIZE, 0, (struct sockaddr*)&clnt_adr, clnt_adr_sz);
+        memset(message, 0, BUF_SIZE);
     }
     close(serv_sock);
     return 0;
