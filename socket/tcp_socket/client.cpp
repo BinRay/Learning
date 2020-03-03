@@ -54,6 +54,8 @@ int main(int argc, char* argv[]){
 
         // 退出客户端，相等为0而不是1
         if(!strcmp(send_message, "q\n") || !strcmp(send_message, "Q\n")){
+            // 连接半关闭，此处意义不大，但是可以说明问题：当不再需要发送，但是还需要接收时，则只断开输出流
+            shutdown(sock, SHUT_WR);
             break;
         }
 
