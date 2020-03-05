@@ -18,7 +18,7 @@ int main(int argc, char* argv[]){
     }
 
     host = gethostbyname(argv[1]);
-    if(host != NULL)
+    if(host == NULL)
         error_handling("get host error");
 
     printf("Official name: %s \n", host -> h_name);
