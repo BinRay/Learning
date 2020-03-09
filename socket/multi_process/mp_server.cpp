@@ -76,7 +76,7 @@ int main(int argc, char* argv[]){
 
         if (pid == 0){          // 子进程
             close(serv_sock);   // 关掉监听sock描述符
-            cout << "child proc pid:" << pid << endl;
+//            cout << "child proc pid:" << pid << endl;             // 这个pid是0
             while((str_len = read(clnt_sock, buf, BUF_SIZE)) != 0){ // EOF 返回0
                 write(clnt_sock, buf, str_len);
                 memset(buf, 0, str_len);
