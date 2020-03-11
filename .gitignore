@@ -4,3 +4,5 @@ socket/multi_process/.idea/
 socket/multi_process/mp_server
 socket/tcp_socket/.idea/
 socket/multi_process/.idea/.gitignore
+socket/multi_process/cmake-build-debug/
+socket/tcp_socket/cmake-build-debug/
