@@ -1,0 +1,1 @@
+import cProfileclass ClassDemo:    def __init__(self):        print("construction method")    prop = 2    def other_method(self):        self.prop = 4classdemo = ClassDemo()print(classdemo.prop)
