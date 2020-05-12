@@ -29,6 +29,9 @@ const elemType* find( const elemType *first, const elemType *last, const elemTyp
      return 0;
 }
 
+
+
+
 int main( int argc, char** argv){
     int a[] = {16, 2, 77, 29};
     std::vector<int> v(a, a + sizeof(a) / sizeof(int));
