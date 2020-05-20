@@ -4,7 +4,7 @@
 
 // Import 'function object', which is more efficient than function pointer.
 // bind2nd() is a function object adapter, which can bind a fixed value to the 2nd parameter.
-// find_if() is alse a stl function. it can accept function object.
+// find_if() is also a stl function. it can accept function object.
 
 #include <functional>
 #include <vector>

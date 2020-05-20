@@ -1,6 +1,6 @@
 How to design a generic algorithm, referring to *essential c++* 3.6.  
 The purpose is to make filter() as flexible as possible.  
-Steps below shows the ditails to achieve this purpose.
+Steps below show the ditails to achieve this purpose.
 1. Find all numbers less than 10 from a vector. 
 2. Use function call instead of comparing values directly by passing arround a function pointer.
 3. Import 'function object', which is more efficient than function pointer.
