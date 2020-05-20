@@ -1,3 +1,4 @@
+import cProfile
 class Solution:
     # 暴力循环：O(n2)
     def twoSum1(self, nums, target):
@@ -17,8 +18,12 @@ class Solution:
                 temp_map[value] = index
 
 
+nums = []
+for i in range(1000000):
+    nums.append(i)
 
 solution = Solution()
+cProfile.run('solution.twoSum2(nums, 800000)')
 result = solution.twoSum2([2, 7, 11, 15], 9)
 print(result)
 
