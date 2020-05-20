@@ -115,7 +115,7 @@ void Triangular::display( int length, int beg_pos, ostream &os ) {
     }
 }
 
-// overload iostream operators
+// override iostream operators
 ostream& operator<<( ostream& os, const Triangular& rhs ){
     Triangular::display( rhs.length(), rhs.beg_pos(), os );
     return os;

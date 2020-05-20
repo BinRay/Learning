@@ -1,0 +1,7 @@
+This project shows the essential elements of a class:
+1. express how to implement a class and what 'private' or 'public' mean.
+2. what are class constructors and the class destructor.
+3. in const member function, we can change 'mutable' member data.
+4. how to use 'static'
+5. build a iterator with 'friend' and operator override. 
+6. we can also override to implement a copy assignment operator and a function object'()' and iostream'<<', etc.
