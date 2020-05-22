@@ -1,0 +1,3 @@
+This project shows the mechanism of inheritance and polymorphism. There are two inheritance hierarchies.  
+num_sequence is base class, while Fibonacci is derived class.  
+when we use num_sequence pointer or reference to invoke a virtual function, the derived class function will take place.  
