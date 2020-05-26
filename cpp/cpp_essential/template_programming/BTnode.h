@@ -28,7 +28,12 @@ public:
 
     void display_val ( ostream& os ) const;
 
+
 private:
+
+    void remove_value( const valType &val, BTnode<valType>*& prev );
+    void static lchild_leaf( BTnode<valType>* leaf, BTnode<valType>* subtree );
+
     valType     _val;
     int         _cnt;
     BTnode*     _lchild;
@@ -80,6 +85,42 @@ void BTnode<elemType>::inorder( ostream &os ) const {
 template<typename elemType>
 void BTnode<elemType>::display_val( ostream &os ) const {
     os << _val << " ";
+}
+
+template<typename valType>
+void BTnode<valType>::lchild_leaf(BTnode<valType> *leaf, BTnode<valType> *subtree) {
+    while ( subtree -> _lchild ) {
+        subtree = subtree -> _lchild;
+    }
+    subtree -> _lchild = leaf;
+}
+
+template<typename valType>
+void BTnode<valType>::remove_value(const valType &val, BTnode<valType>*& prev) {
+    // prev refers to the lchild or rchild of the parent node. we can change its value directly via refenence.
+    if ( val < _val ){
+        if ( ! _lchild ){
+            return; // not in this binary tree
+        } else {
+            _lchild -> remove_value( val, _lchild );
+        }
+    } else if ( val > _val ) {
+        if ( ! _rchild ) {
+            return; // not in this binary tree
+        } else {
+            _rchild -> remove_value( val, _rchild );
+        }
+    } else {    // equivalent
+        if ( _rchild ){
+            prev = _rchild;
+            if ( _lchild ){
+                lchild_leaf( _lchild, _rchild);
+            }
+        } else {
+            prev = _lchild;
+        }
+        delete this;
+    }
 }
 
 #endif //TEMPLATE_PROGRAMMING_BTNODE_H

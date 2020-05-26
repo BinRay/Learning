@@ -18,22 +18,29 @@ public:
     BinaryTree();
     BinaryTree( const BinaryTree& );
     ~BinaryTree();
-    BinaryTree& operator=( const BinaryTree& );
 
-    //todo: copy
+    //BinaryTree& operator=( const BinaryTree& );
     //void copy();
+
     bool empty() { return _root == 0; }
-    //void clear();
+
+    void clear();
+    static void clear( BTnode<elemType>* pt );
 
     void insert( const elemType& val );
 
+    void remove( const elemType& val );
+
     void inorder( ostream& os = cout ){
-        _root -> inorder( os );
+        if ( _root ){
+            _root -> inorder( os );
+        }
     }
 
 //private:
     BTnode<elemType>* _root;
 
+    void remove_root();
 };
 
 // 这里写中文是为了强调：模板类的函数定义一定要与声明的上下文中，此处的定义并不会真正分配空间。
@@ -58,5 +65,51 @@ void BinaryTree<elemType>::insert(const elemType &val) {
         _root -> insert_value( val );
     }
 }
+
+template<typename elemType>
+void BinaryTree<elemType>::remove(const elemType &elem) {
+    // we can split this operation to two parts:
+    // 1. when val equals to the root's values, we don't need to operate parent node.
+    // 2. the othen regular node values.
+    if ( elem == _root -> _val ) {
+        remove_root();
+    } else {
+        _root -> remove_value( elem, _root );
+    }
+}
+
+template<typename elemType>
+void BinaryTree<elemType>::remove_root() {
+    if ( ! _root )
+        return;
+    if ( ! _root -> _rchild ) {
+        _root = _root -> _lchild;
+    } else {
+        BTnode<elemType>* tmp = _root;
+        _root = _root -> _rchild;
+        if ( tmp -> _lchild ){
+            BTnode<elemType>::lchild_leaf( tmp -> _lchild, _root );
+        }
+    }
+    delete _root;
+}
+
+template<typename elemType>
+void BinaryTree<elemType>::clear() {
+    if ( _root ) {
+        clear( _root );
+        _root = 0;
+    }
+}
+
+template<typename elemType>
+void BinaryTree<elemType>::clear(BTnode<elemType> *pt) {
+    if ( pt ){
+        clear( pt -> _lchild );
+        clear( pt -> _rchild );
+        delete pt;
+    }
+}
+
 
 #endif //TEMPLATE_PROGRAMMING_BINARYTREE_H

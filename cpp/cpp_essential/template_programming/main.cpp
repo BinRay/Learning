@@ -16,11 +16,49 @@ void val_int(){
     bt.insert( 4 );
 
     bt.inorder();
+    cout << endl;
+    bt.remove( 7 );
+    bt.remove( 4 );
+//    bt.remove( 6 );
+
+    bt.inorder();
 }
 
-int main( int argc, char** argv ){
+void val_string() {
+    BinaryTree<string> bt;
 
-    val_int();
+    bt.insert( "aaaaa" );
+    bt.insert( "bbbbb" );
+    bt.insert( "ccccc" );
+    bt.insert( "ddddd" );
+    bt.insert( "eeeee" );
+    bt.insert( "abcde" );
+    bt.insert( "bcdea" );
+    bt.insert( "bcdee" );
 
+    bt.inorder();
+    cout << endl;
+
+    bt.clear();
+    bt.inorder();
+
+}
+
+int main(int argc, char** argv ){
+
+    cout << "input which type you would operate:" << endl;
+
+    int type;
+    cin >> type;
+    switch ( type ){
+        case 1:
+            val_int();
+        case 2:
+            val_string();
+        default:
+            return 0;
+    }
+
+    return 0;
 }
 
