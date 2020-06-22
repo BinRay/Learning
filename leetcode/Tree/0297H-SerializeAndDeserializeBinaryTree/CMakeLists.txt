@@ -1,0 +1,6 @@
+CMAKE_MINIMUM_REQUIRED(VERSION 3.13)
+project(SerializeAndDeserializeBinaryTree)
+
+set(CMAKE_CXX_STANDARD, 14)
+add_executable(SerializeAndDeserializeBinaryTreeDFS SerializeAndDeserializeBinaryTreeDFS.cpp)
+add_executable(SerializeAndDeserializeBinaryTreeBFS SerializeAndDeserializeBinaryTreeBFS.cpp)
