@@ -17,6 +17,8 @@ struct TreeNode {
     TreeNode *right;
     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 };
+//  vector<int> v = { 1, 1, 2, INT_MIN, INT_MIN,INT_MIN,2,INT_MIN,3,INT_MIN,3 };
+//  TreeNode* root = construct_tree( v );
 TreeNode* construct_tree( vector<int> & v ){
     
     vector<int>::iterator it = v.begin();
