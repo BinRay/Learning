@@ -1,0 +1,3 @@
+project(MinimumWindowSubstring)
+set(CMAKE_CXX_STANDARD, 14)
+add_executable(MinimumWindowSubstring MinimumWindowSubstring.cpp)
