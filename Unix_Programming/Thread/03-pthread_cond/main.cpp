@@ -59,15 +59,16 @@ void* customer( void* arg ){
 void* producer( void* arg ){
     for ( int i = 0; i < 10; i++ ){
         enqueue_msg();
+        sleep(1);
     }
 }
 
 int main( int argc, char* argv[] ){
 
-    pthread_create( &ntid, NULL, customer, NULL );
-    pthread_create( &ntid, NULL, producer, NULL );
+    pthread_create( &c_tid, NULL, customer, NULL );
+    pthread_create( &p_tid, NULL, producer, NULL );
 
     pthread_join( c_tid, NULL );
     pthread_join( p_tid, NULL );
-    
+
 }
