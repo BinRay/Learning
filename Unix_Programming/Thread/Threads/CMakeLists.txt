@@ -1,0 +1,5 @@
+cmake_minimum_required( VERSION 3.16 )
+project(Threads)
+aux_source_directory(. SRCS)
+set( CMAKE_CXX_STANDARD 11 )
+add_executable(main ${SRCS})
