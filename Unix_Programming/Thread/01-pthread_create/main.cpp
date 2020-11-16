@@ -7,8 +7,13 @@
 
 using namespace std;
 
+pthread ntid;
+
+void* thr_fn( void* arg ){
+    cout << "new tid:" << pthread_self() << endl;
+}
 int main( int argc, char* argv[] ){
     pthread_t tid = pthread_self();
 
-    cout << "tid:" << tid << endl;
+    cout << "main tid:" << tid << endl;
 }
