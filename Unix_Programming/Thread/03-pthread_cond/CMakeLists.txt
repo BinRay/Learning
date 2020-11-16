@@ -1,5 +1,5 @@
 cmake_minimum_required( VERSION 3.16 )
-project( pthread_mutex )
+project( pthread_cond )
 aux_source_directory( . SRCS )
 set( CMAKE_CXX_STANDARD 11 )
 set( TARGET main )
